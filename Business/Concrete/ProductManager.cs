@@ -28,16 +28,28 @@ namespace Business.Concrete
             _productDal.Add(product);
             return new SuccessResult();
         }
-
-        public IResult GetById(int Id)
+        public IDataResult<List<Product>> GetlAll()
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<Product>>(_productDal.GetAll().ToList());
         }
 
-        public IDataResult<Product> GetlAll()
+        public IResult Remove(Product product)
         {
-            throw new NotImplementedException();
+            _productDal.Delete(product);
+            return new SuccessResult();
         }
+
+        public IResult UpDate(Product product)
+        {
+            _productDal.Update(product);
+            return new SuccessResult();
+        }
+
+        public IDataResult<Product> GetById(int Id)
+        {
+            return new SuccessDataResult<Product>(_productDal.Get(p => p.CategoryID == Id));
+        }
+
         private IResult CheckIfProductNameOfExists(string productName)
         {
             var result = _productDal.GetAll(p => p.ProductName == productName).Any();
@@ -47,5 +59,9 @@ namespace Business.Concrete
             }
             return new SuccessResult();
         }
+
+        
+
+       
     }
 }
