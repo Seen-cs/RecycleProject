@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getbyid")]
+        [HttpPost("getbyid")]
         public IActionResult GetById(int id)
         {
             var result = _productService.GetById(id);
@@ -45,7 +45,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("Remove")]
+        [HttpPost("remove")]
         public IActionResult Remove(Product product)
         {
             var result = _productService.Remove(product);
@@ -74,7 +74,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("update")]
+        [HttpPost("update")]
         public IActionResult UpDate(Product product)
         {
             var result = _productService.UpDate(product);

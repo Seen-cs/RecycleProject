@@ -26,7 +26,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        [HttpGet("getbycategoryId")]
+        [HttpPost("getbycategoryId")]
         public IActionResult GetByCategoryId(int id)
         {
             var result = _categoryService.GetByCategoryId(id);
