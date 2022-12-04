@@ -15,9 +15,9 @@ namespace Business.IdendityValidation.Adapter
         
         public bool  CheckIfRealPerson(UserForRegisterDto userForRegister)
         {
-           
+            
             var client = new KPSPublicSoapClient(KPSPublicSoapClient.EndpointConfiguration.KPSPublicSoap);
-            var result=  client.TCKimlikNoDogrulaAsync(Convert.ToInt64(userForRegister.NationalityId), userForRegister.FirstName.ToUpper(), userForRegister.LastName.ToUpper(),userForRegister.DateOfBirth);   
+            var result=  client.TCKimlikNoDogrulaAsync(Convert.ToInt64(userForRegister.NationalityId), userForRegister.FirstName.ToUpper(), userForRegister.LastName.ToUpper(), userForRegister.DateOfBirth);   
             return result.Result.Body.TCKimlikNoDogrulaResult;
 
         }

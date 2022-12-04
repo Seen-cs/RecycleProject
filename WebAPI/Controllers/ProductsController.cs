@@ -17,7 +17,7 @@ namespace WebAPI.Controllers
     {
         IProductService _productService;
         ICategoryService _categoryService;
-        public ProductsController(IProductService productService,ICategoryService categoryService)
+        public ProductsController(IProductService productService, ICategoryService categoryService)
         {
             _productService = productService;
             _categoryService = categoryService;
@@ -33,10 +33,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("getbyid")]
-        public IActionResult GetById(int id)
+        [HttpGet("getbycategory")]
+        public IActionResult GetByCategory(int categoryId)
         {
-            var result = _productService.GetById(id);
+            var result = _productService.GetByCategory(categoryId);
             if (result.Success)
             {
                 return Ok(result);
@@ -45,7 +45,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("remove")]
+        [HttpPost("Remove")]
         public IActionResult Remove(Product product)
         {
             var result = _productService.Remove(product);
@@ -58,13 +58,8 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(ProductDetailDto productDetailDto)
+        public IActionResult Add(Product product)
         {
-            var a = _categoryService.GetByCategoryName(productDetailDto.CategoryName).Data.CategoryID;
-            Product product = new Product();
-            product.CategoryID = a;
-            product.ProductName = productDetailDto.ProductName;
-            product.UnitPrice = productDetailDto.UnitPrice;
 
             var result = _productService.Add(product);
             if (result.Success)

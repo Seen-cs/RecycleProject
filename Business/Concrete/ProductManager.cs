@@ -44,10 +44,9 @@ namespace Business.Concrete
             _productDal.Update(product);
             return new SuccessResult();
         }
-
-        public IDataResult<Product> GetById(int Id)
+        public IDataResult<IList<Product>> GetByCategory(int Id)
         {
-            return new SuccessDataResult<Product>(_productDal.Get(p => p.CategoryID == Id));
+            return new SuccessDataResult<IList<Product>>(_productDal.GetAll(p => p.CategoryID == Id));
         }
 
         private IResult CheckIfProductNameOfExists(string productName)
