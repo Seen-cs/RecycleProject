@@ -1,5 +1,8 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Contants;
+using Business.ValitadionRules.FluentValitadion;
+using Core.Aspect.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -18,6 +21,8 @@ namespace Business.Concrete
         {
             _productDal = productDal;
         }
+        [SecuredOperation("product.add,admin")]
+        [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
             var result = BusinessRules.Run(CheckIfProductNameOfExists(product.ProductName));
@@ -33,20 +38,24 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Product>>(_productDal.GetAll().ToList());
         }
 
+
+        [SecuredOperation("product.add,admin")]
         public IResult Remove(Product product)
         {
             _productDal.Delete(product);
             return new SuccessResult();
         }
 
+
+        [SecuredOperation("product.add,admin")]
         public IResult UpDate(Product product)
         {
             _productDal.Update(product);
             return new SuccessResult();
         }
-        public IDataResult<IList<Product>> GetByCategory(int Id)
+        public IDataResult<List<Product>> GetByCategory(int Id)
         {
-            return new SuccessDataResult<IList<Product>>(_productDal.GetAll(p => p.CategoryID == Id));
+            return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryID == Id));
         }
 
         private IResult CheckIfProductNameOfExists(string productName)

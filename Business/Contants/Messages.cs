@@ -21,5 +21,7 @@ namespace Business.Contants
 
         public static string AuthorizationDenied = "Yetkiniz yok";
         public static string ProductNameAlreadyExists = "Ürün ismi zaten mevcut";
+        public static string NotUser = "Girdiğiniz bilgiler yanlış";
+        public static string NotIdendity = "TC Kimlik numrası 11 haneli olmalı";
     }
 }

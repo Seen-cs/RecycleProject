@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
         [HttpPost("register")]
         public ActionResult Register(UserForRegisterDto userForRegisterDto)
         {
-            if (_CustomerCheckService.CheckIfRealPerson(userForRegisterDto))
+            if (_CustomerCheckService.CheckIfRealPerson(userForRegisterDto).Success)
             {
                 var userExists = _authService.UserExists(userForRegisterDto.Email);
                 if (!userExists.Success)
@@ -62,12 +62,8 @@ namespace WebAPI.Controllers
                 }
 
                 return BadRequest(result);
-            }
-            else
-            {
-                return BadRequest(Messages.UserNotFound);
-            }
-
+            }    
+                return BadRequest(Messages.NotUser);
 
         }
     }
