@@ -21,7 +21,7 @@ namespace Business.Concrete
         {
             _productDal = productDal;
         }
-        [SecuredOperation("product.add,admin")]
+        
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
@@ -39,15 +39,12 @@ namespace Business.Concrete
         }
 
 
-        [SecuredOperation("product.add,admin")]
         public IResult Remove(Product product)
         {
             _productDal.Delete(product);
             return new SuccessResult();
         }
 
-
-        [SecuredOperation("product.add,admin")]
         public IResult UpDate(Product product)
         {
             _productDal.Update(product);
