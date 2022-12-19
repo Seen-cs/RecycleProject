@@ -62,8 +62,12 @@ namespace WebAPI.Controllers
                 }
 
                 return BadRequest(result);
-            }    
-                return BadRequest(Messages.NotUser);
+            }
+            else
+            {
+                return BadRequest(Messages.UserNotFound);
+            }
+
 
         }
     }
