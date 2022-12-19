@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
         [HttpPost("balance")]
         public ActionResult balance(string balance)
         {
-            var walletAddress ="";
+            var walletAddress = "";
             try
             {
                 var additional = "?a=";
@@ -35,9 +35,10 @@ namespace WebAPI.Controllers
             {
                 return BadRequest();
             }
-            finally {
+            finally
+            {
 
-                
+
             }
             return Ok(JsonConvert.SerializeObject(walletAddress));
 
